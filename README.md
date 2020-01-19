@@ -41,7 +41,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![about](images/about.gif)
+<p align="center">
+<img src="images/demo.gif" width=700>
+</p>
+
 
 This repository is a little add-on to [jgoerner/t-47](https://github.com/jgoerner/t-47/) to provide custom Neo4j functionality, such as initial data loading.
 See the [release section](https://github.com/jgoerner/t-47-procedures/releases) for an overview about different versions.
@@ -49,6 +52,7 @@ See the [release section](https://github.com/jgoerner/t-47-procedures/releases) 
 ### Built With
 * [Neo4j](https://neo4j.com/)
 * [Maven](https://maven.apache.org/)
+* Love ❤
 
 
 
