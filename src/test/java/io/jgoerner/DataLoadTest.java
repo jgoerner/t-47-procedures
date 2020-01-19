@@ -10,13 +10,15 @@ import org.neo4j.driver.v1.Session;
 import org.neo4j.harness.ServerControls;
 import org.neo4j.harness.TestServerBuilders;
 
+import java.net.URL;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit test for simple Misc.
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class MiscTest {
+public class DataLoadTest {
 
     private static final Config driverConfig = Config.build().withoutEncryption().toConfig();
     private ServerControls embeddedDatabaseServer;
@@ -26,23 +28,26 @@ public class MiscTest {
 
         this.embeddedDatabaseServer = TestServerBuilders
                 .newInProcessBuilder()
-                .withProcedure(Misc.class)
+                .withProcedure(DataLoad.class)
                 .newServer();
     }
 
 
     @Test
-    public void shouldAllowReturningTheLastValue() {
+    void shouldLoadData() {
 
         // This is in a try-block, to make sure we close the driver after the test
-        try( Driver driver = GraphDatabase.driver(embeddedDatabaseServer.boltURI(), driverConfig);
-             Session session = driver.session()) {
+        try(Driver driver = GraphDatabase.driver(embeddedDatabaseServer.boltURI(), driverConfig);
+            Session session = driver.session()) {
+            // given
+            URL url = ClassLoader.getSystemResource("rebel-snowspeeder-assembly-excerpt.csv");
 
             // When
-            String result = session.run( "CALL t47.ping()").single().get("out").asString();
+            session.run( "CALL t47.init('" + "file://" + url.getPath() + "')");
+            Long result = session.run("MATCH (n) RETURN COUNT(*) as cnt").single().get("cnt").asLong();
 
             // Then
-            assertThat(result).isEqualTo( "pong");
+            assertThat(result).isEqualTo( 5L );
         }
     }
 }
