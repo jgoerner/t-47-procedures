@@ -44,3 +44,4 @@ buildNumber.properties
 
 ## custom ##
 .idea
+.DS_STORE
