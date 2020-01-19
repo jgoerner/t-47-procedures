@@ -42,7 +42,7 @@
 ## About The Project
 
 <p align="center>
-          <img src="images/demo.gif">
+<img src="images/demo.gif" width=700>
 </p>
 
 
