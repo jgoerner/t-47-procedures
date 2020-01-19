@@ -41,7 +41,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<p align="center>
+<p align="center">
 <img src="images/demo.gif" width=700>
 </p>
 
